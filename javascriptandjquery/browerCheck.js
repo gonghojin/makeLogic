@@ -1,4 +1,9 @@
-var common = {
+var browerCheck = {
+    init : function() {
+        var _this = this;
+        _this.checkBroswer();
+        _this.makeRemoveElement();
+    },
     /***
      * result Value
      * -1 :  no value
@@ -53,6 +58,17 @@ var common = {
                 event.returnValue = false;
             }
         }
+    },
+
+    // 익스플로러에서는  remove()를 지원하지 않기 때문에 생성
+    makeRemoveElement : function() {
+    if (!('remove' in Element.prototype)) {
+        Element.prototype.remove = function() {
+            if (this.parentNode) {
+                this.parentNode.removeChild(this);
+            }
+        };
     }
 }
-common
+}
+browerCheck.init();
