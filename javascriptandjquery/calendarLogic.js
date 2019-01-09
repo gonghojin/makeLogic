@@ -78,6 +78,16 @@ var calendarLogic = {
             return this.yyyymmdd() + this.hhmmss();
         };
 
+    },
+    /**
+     * "yyyy-mm-dd" 형식 체크
+     * @param date
+     */
+    validationFormat_snale : function (date) {
+        var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+        if(!date_pattern .test(form.name.value)){
+            return;
+        }
     }
 }
 calendarLogic.init();
