@@ -1,7 +1,8 @@
 <!-- 날짜 포맷 형식을 변경을 위한 로직-->
 var calendarLogic = {
     init: function () {
-
+        var _this = this;
+        _this.makeDateFormat();
     },
     /**
      * 날짜 문자 포맷 변경(ex 2018-06-08 <-> 20180608)\
@@ -45,54 +46,20 @@ var calendarLogic = {
         return myDate.getFullYear() + '-' + ('0' + (myDate.getMonth() + 1)).slice(-2) + '-' + myDate.getDate() + ' ' + myDate.getHours() + ':' + ('0' + (myDate.getMinutes())).slice(-2);
 
     },
-
-    /**
-     * 날짜 타입 변경 2 - yyyymmddhhmmss
-     *  ex) date.yyyymmddhhmmss
-     *      return 20181108010644
-     */
-    getyyyymmddhhmmss: function () {
-        Date.prototype.yyyymmdd = function () {
-            var mm = this.getMonth() + 1;
-            var dd = this.getDate();
-
-            //
-            return [this.getFullYear(),
-                (mm > 9 ? '' : '0') + mm,
-                (dd > 9 ? '' : '0') + dd
-            ].join('');
-        };
-
-        Date.prototype.hhmmss = function () {
-            var hh = this.getHours();
-            var mm = this.getMinutes();
-            var ss = this.getSeconds();
-
-            return [(hh > 9 ? '' : '0') + hh,
-                (mm > 9 ? '' : '0') + mm,
-                (ss > 9 ? '' : '0') + ss,
-            ].join('');
-        };
-
-        Date.prototype.yyyymmddhhmmss = function () {
-            return this.yyyymmdd() + this.hhmmss();
-        };
-
-    },
     /**
      * "yyyy-mm-dd" 형식 체크
      * @param date
      */
-    validationFormat_snale : function (date) {
+    validationFormat_snale: function (date) {
         var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
-        if(!date_pattern .test(form.name.value)){
+        if (!date_pattern.test(form.name.value)) {
             return;
         }
     },
 
-
     /**
-     * //2011년 09월 11일 오후 03시 45분 42초
+     format에 따른 날짜 툴력
+     //2011년 09월 11일 오후 03시 45분 42초
      console.log(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
 
      //2011-09-11
@@ -157,7 +124,7 @@ var calendarLogic = {
         Number.prototype.zf = function (len) {
             return this.toString().zf(len);
         };
-    }()
+    }
 }
 calendarLogic.init();
 
